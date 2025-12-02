@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Portfolio Maker - Input</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="input-bg">
+  <div class="container">
+    <h1>AI Portfolio Maker - Input</h1>
+    <div id="debug"></div>
+    <form id="portfolioForm" enctype="multipart/form-data">
+      <section>
+        <h2>Home</h2>
+        <label>Name: <input type="text" name="name" required data-tooltip="Enter your full name" /></label>
+        
+        <h2>About me</h2>
+        <label>Photo: <input type="file" name="photo" accept="image/*" id="photoInput" data-tooltip="Upload your profile picture" /></label>
+        <label>Course & Year: <input type="text" name="course" required data-tooltip="E.g. B.Tech CSE, 3rd Year" /></label>
+        <label>Specialization: <input type="text" name="specialization" data-tooltip="Your focus area or major" /></label>
+        <label>Bio: <textarea name="careerGoal" required data-tooltip="Describe your career goals"></textarea></label>
+      </section>
+
+      <section>
+        <h2>My services</h2>
+        <label>Internships: <input type="text" name="internships" required data-tooltip="E.g. company name " /></label>
+        <label>Posting: <input type="text" name="posting" data-tooltip="Your focus area " /></label>
+        <label>Duration: <textarea name="duration" required data-tooltip="june to december "></textarea></label>    
+      </section>    
+
+      <section>
+        <h2>My skills</h2>
+        <label>Technical Skills (comma separated): <input type="text" name="technicalSkills" data-tooltip="E.g. Java, Python, React" /></label>
+        <label>Soft Skills (comma separated): <input type="text" name="softSkills" data-tooltip="E.g. Leadership, Creativity" /></label>
+        <label>Certifications & Courses: <textarea name="certifications" data-tooltip="List your certificates or courses"></textarea></label>
+      </section>
+
+      <section>
+        <h2>My project</h2>
+        <label>Academic Projects: <textarea name="academicProjects" data-tooltip="List your academic projects (one per line)"></textarea></label>
+        <label>Personal Projects: <textarea name="personalProjects" data-tooltip="List projects or hobbies (one per line)"></textarea></label>
+        <label>One Project in Detail: <textarea name="detailedProject" data-tooltip="Explain a detailed project"></textarea></label>
+      </section>
+
+      <section>
+        <h2>My achievements</h2>
+        <label>Competitions / Awards: <textarea name="achievements" data-tooltip="Highlights of achievements (one per line)"></textarea></label>
+        <label>Leadership Positions (clubs, MUN, etc.): <textarea name="leadership" data-tooltip="Leadership roles"></textarea></label>
+        <label>Most Proud Achievement: <textarea name="proudAchievement" data-tooltip="Your proudest achievement"></textarea></label>
+      </section>
+
+      <section>
+        <h2>Contact me</h2>
+        <label>Motivation: <textarea name="quote" data-tooltip="Enter a personal Motivation"></textarea></label>
+        <label>Name: <textarea name="contactName" data-tooltip="Name"></textarea></label>
+        <label>Address: <textarea name="address" data-tooltip="home"></textarea></label>
+        <label>Email: <input type="email" name="email" required data-tooltip="Your email address" /></label>
+        <label>LinkedIn URL: <input type="url" name="linkedin" data-tooltip="LinkedIn profile URL" /></label>
+        <label>GitHub URL: <input type="url" name="github" data-tooltip="GitHub profile URL" /></label>
+      </section>
+
+      <button type="submit" class="cyberpunk-button">Create Portfolio</button>
+    </form>
+  </div>
+
+  <div id="tooltip" class="tooltip-hidden"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('Input page loaded.');
+      const form = document.getElementById('portfolioForm');
+      const debugDiv = document.getElementById('debug');
+
+      function showError(msg) {
+        console.error(msg);
+        debugDiv.textContent = msg;
+        debugDiv.style.display = 'block';
+      }
+
+      async function submitForm() {
+        try {
+            const formData = new FormData(document.getElementById('portfolioForm'));
+            const portfolioData = {};
+            
+            // Handle photo first
+            const photoInput = document.getElementById('photoInput');
+            if (photoInput && photoInput.files && photoInput.files[0]) {
+                try {
+                    const base64String = await convertFileToBase64(photoInput.files[0]);
+                    portfolioData.photo = base64String;
+                    console.log('Photo successfully converted to base64');
+                } catch (error) {
+                    console.error('Error converting photo to base64:', error);
+                    showError('Error processing photo. Please try again.');
+                    return;
+                }
+            }
+
+            // Handle other form fields
+            for (let [key, value] of formData.entries()) {
+                if (key !== 'photo' && value) {
+                    portfolioData[key] = String(value).trim();
+                }
+            }
+
+            console.log('Saving data to localStorage:', portfolioData);
+            
+            // Store data in localStorage
+            localStorage.setItem('portfolioData', JSON.stringify(portfolioData));
+            
+            // Redirect to output.html
+            console.log('Redirecting to output.html');
+            window.location.href = 'output.html';
+        } catch (error) {
+            console.error('Error in form submission:', error);
+            showError('There was an error submitting the form. Please try again.');
+        }
+      }
+
+      // Function to convert file to base64
+      function convertFileToBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = error => reject(error);
+          reader.readAsDataURL(file);
+        });
+      }
+
+      if (form) {
+          form.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              console.log('Form submitted');
+              await submitForm();
+          });
+
+          form.addEventListener('keydown', async (e) => {
+              if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                  e.preventDefault();
+                  await submitForm();
+              }
+          });
+      } else {
+          console.error('Form element not found');
+      }
+
+      const tooltip = document.getElementById('tooltip');
+      function showTooltip(e) {
+        const target = e.target;
+        const tooltipText = target.getAttribute('data-tooltip');
+        if (tooltipText) {
+          tooltip.textContent = tooltipText;
+          tooltip.classList.remove('tooltip-hidden');
+          tooltip.classList.add('tooltip-visible');
+          const rect = target.getBoundingClientRect();
+          tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight - 8}px`;
+          tooltip.style.left = `${rect.left + window.scrollX}px`;
+        }
+      }
+      function hideTooltip() {
+        tooltip.classList.remove('tooltip-visible');
+        tooltip.classList.add('tooltip-hidden');
+      }
+      function moveTooltip(e) {
+        const rect = e.target.getBoundingClientRect();
+        tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight - 8}px`;
+        tooltip.style.left = `${rect.left + window.scrollX}px`;
+      }
+
+      const inputs = document.querySelectorAll('input[data-tooltip], textarea[data-tooltip]');
+      inputs.forEach(input => {
+        input.addEventListener('focus', showTooltip);
+        input.addEventListener('blur', hideTooltip);
+        input.addEventListener('mousemove', moveTooltip);
+      });
+
+      console.log('Setup complete.');
+    });
+  </script>
+</body>
+</html>

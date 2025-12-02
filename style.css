@@ -1,0 +1,824 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap'); /* For cyberpunk button */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scroll bar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* All similar content styling codes */
+section {
+    padding: 100px 0;
+}
+
+.max-width {
+    max-width: 1300px;
+    padding: 0 80px;
+    margin: auto;
+}
+
+.about, .services, .skills, .projects, .achievements, .contact, footer {
+    font-family: 'Poppins', sans-serif;
+}
+
+.about .about-content,
+.services .serv-content,
+.skills .skills-content,
+.contact .contact-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+section .title {
+    position: relative;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 60px;
+    padding-bottom: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    color: #ffffff;
+    text-shadow: 0 0 10px #00ffe7;
+}
+
+section .title::before {
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    width: 180px;
+    height: 3px;
+    background: #00ffe7;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px #00ffe7;
+}
+
+section .title::after {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    font-size: 20px;
+    color: #ff00e7;
+    padding: 0 5px;
+    background: rgba(0, 17, 26, 0.9);
+    transform: translateX(-50%);
+    text-shadow: 0 0 5px #ff00e7;
+}
+
+/* ===========================================
+   CYBERPUNK THEME INTEGRATION FOR PORTFOLIO
+   =========================================== */
+
+/* Global body: Cyberpunk background */
+/* Default body style for output page */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; 
+    padding: 0;
+    color: #ffffff;
+    background-image: url("hello.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+/* Add a dark overlay for better readability */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+/* Override background for input page */
+body.input-bg {
+    background-image: none;
+    background-color: #000000;
+}
+
+body.input-bg::before {
+    display: none;
+}
+
+/* Navbar styling with cyberpunk theme */
+.navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    padding: 30px 0;
+    font-family: 'Ubuntu', sans-serif;
+    transition: all 0.3s ease;
+    background: rgba(0, 17, 26, 0.9);
+    border-bottom: 2px solid #00ffe7;
+    box-shadow: 0 0 20px rgba(0, 255, 231, 0.5);
+}
+
+.navbar.sticky {
+    padding: 15px 0;
+    background: rgba(255, 0, 231, 0.2);
+    border-bottom-color: #ff00e7;
+    box-shadow: 0 0 20px rgba(255, 0, 231, 0.5);
+}
+
+.navbar .max-width {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .logo a {
+    color: #00ffe7;
+    font-size: 35px;
+    font-weight: 600;
+    text-shadow: 0 0 10px #00ffe7;
+}
+
+.navbar .logo a span {
+    color: #ff00e7;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px #ff00e7;
+}
+
+.navbar.sticky .logo a span {
+    color: #ffffff;
+}
+
+.navbar .menu li {
+    list-style: none;
+    display: inline-block;
+}
+
+.navbar .menu li a {
+    display: block;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 25px;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px #00ffe7;
+}
+
+.navbar .menu li a:hover {
+    color: #ff00e7;
+    text-shadow: 0 0 10px #ff00e7;
+}
+
+.navbar.sticky .menu li a:hover {
+    color: #00ffe7;
+    text-shadow: 0 0 10px #00ffe7;
+}
+
+/* Menu btn styling */
+.menu-btn {
+    color: #00ffe7;
+    font-size: 23px;
+    cursor: pointer;
+    display: none;
+    text-shadow: 0 0 5px #00ffe7;
+}
+
+/* Portfolio Form Styling */
+.input-bg {
+    background-color: #000000;
+    min-height: 100vh;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Ensure the form content is visible on black background */
+.input-bg .container {
+    background: rgba(0, 5, 10, 0.7);
+    border: 1px solid #00ffe7;
+    box-shadow: 0 0 30px rgba(0, 255, 231, 0.2);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background: rgba(0, 5, 5, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 255, 231, 0.2);
+    border: 1px solid #00ffe7;
+}
+
+.container h1 {
+    color: #00ffe7;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px #00ffe7;
+}
+
+#portfolioForm section {
+    background: rgba(0, 10, 10, 0.5);
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    border: 1px solid #00ffe7;
+    box-shadow: 0 0 10px rgba(0, 255, 231, 0.2);
+}
+
+#portfolioForm h2 {
+    color: #00ffe7;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    text-shadow: 0 0 8px #00ffe7;
+}
+
+#portfolioForm label {
+    display: block;
+    margin-bottom: 15px;
+    color: #00ffe7;
+    text-shadow: 0 0 5px #00ffe7;
+}
+
+#portfolioForm input[type="text"],
+#portfolioForm input[type="email"],
+#portfolioForm input[type="url"],
+#portfolioForm textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    background: rgba(0, 15, 15, 0.3);
+    border: 1px solid #00ffe7;
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 0 0 5px #00ffe7;
+    transition: all 0.3s ease;
+}
+
+#portfolioForm input[type="file"] {
+    color: #00ffe7;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+#portfolioForm textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+#portfolioForm input:focus,
+#portfolioForm textarea:focus {
+    outline: none;
+    box-shadow: 0 0 15px #00ffe7;
+    background: rgba(0, 255, 231, 0.1);
+}
+
+.cyberpunk-button {
+    display: block;
+    width: 250px;
+    margin: 40px auto 20px;
+    padding: 15px 30px;
+    background: transparent;
+    color: #00ffe7;
+    border: 2px solid #00ffe7;
+    border-radius: 5px;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #00ffe7;
+    font-family: 'VT323', monospace;
+}
+
+.cyberpunk-button:hover {
+    background: #00ffe7;
+    color: #001;
+    box-shadow: 0 0 20px #00ffe7;
+}
+
+/* Tooltip Styles */
+.tooltip-hidden {
+    display: none;
+}
+
+.tooltip-visible {
+    display: block;
+    position: absolute;
+    background: rgba(0, 255, 231, 0.1);
+    color: #00ffe7;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #00ffe7;
+    box-shadow: 0 0 5px #00ffe7;
+    z-index: 1000;
+    font-size: 14px;
+}
+
+/* Debug div styling */
+#debug {
+    display: none;
+    padding: 10px;
+    margin: 10px 0;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    border-radius: 5px;
+    text-shadow: 0 0 5px #ff0000;
+}
+
+/* Scroll-up button with cyberpunk glow */
+.scroll-up-btn {
+    position: fixed;
+    height: 45px;
+    width: 42px;
+    background: rgba(0, 255, 231, 0.2);
+    right: 30px;
+    bottom: 10px;
+    text-align: center;
+    line-height: 45px;
+    color: #00ffe7;
+    z-index: 9999;
+    font-size: 30px;
+    border-radius: 6px;
+    border: 2px solid #00ffe7;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #00ffe7;
+}
+
+.scroll-up-btn.show {
+    bottom: 30px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.scroll-up-btn:hover {
+    background: rgba(255, 0, 231, 0.3);
+    border-color: #ff00e7;
+    box-shadow: 0 0 15px #ff00e7;
+    filter: brightness(110%);
+}
+
+/* Home section styling with cyberpunk adaptation */
+.home {
+    display: flex;
+    background: transparent; /* Remove original background, use body bg */
+    height: 100vh;
+    color: #fff;
+    min-height: 500px;
+    font-family: 'Ubuntu', sans-serif;
+    position: relative;
+}
+
+.home .max-width {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.home .max-width .row {
+    margin-right: 0;
+}
+
+.home .home-content .text-1 {
+    font-size: 27px;
+    text-shadow: 0 0 10px #00ffe7;
+}
+
+.home .home-content .text-2 {
+    font-size: 75px;
+    font-weight: 600;
+    margin-left: -3px;
+    text-shadow: 0 0 15px #ff00e7;
+    color: #ffffff;
+}
+
+.home .home-content .text-3 {
+    font-size: 40px;
+    margin: 5px 0;
+    text-shadow: 0 0 10px #00ffe7;
+}
+
+.home .home-content .text-3 span {
+    color: #ff00e7;
+    font-weight: 500;
+    text-shadow: 0 0 15px #ff00e7;
+}
+
+.home .home-content a {
+    display: inline-block;
+    background: rgba(0, 255, 231, 0.2);
+    color: #00ffe7;
+    font-size: 25px;
+    padding: 12px 36px;
+    margin-top: 20px;
+    font-weight: 400;
+    border-radius: 6px;
+    border: 2px solid #00ffe7;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #00ffe7;
+    text-shadow: 0 0 5px #00ffe7;
+    font-family: 'VT323', monospace;
+    letter-spacing: 2px;
+}
+
+.home .home-content a:hover {
+    color: #ff00e7;
+    background: rgba(255, 0, 231, 0.3);
+    border-color: #ff00e7;
+    box-shadow: 0 0 15px #ff00e7;
+}
+
+/* About section styling with cyberpunk */
+.about .title::after {
+    content: "who i am";
+    color: #ff00e7;
+}
+
+.about .about-content .left {
+    width: 45%;
+}
+
+.profile-image-container {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    padding: 15px;
+    background: rgba(0, 10, 20, 0.7);
+    border: 3px solid #00ffe7;
+    border-radius: 20px;
+    box-shadow: 
+        0 0 30px rgba(0, 255, 231, 0.5),
+        0 0 60px rgba(0, 255, 231, 0.3),
+        inset 0 0 40px rgba(0, 255, 231, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.profile-image-container img:hover {
+    transform: scale(1.05);
+}
+
+.profile-image-container::before {
+    content: 'Profile Picture';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #00ffe7;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 15px #00ffe7;
+}
+
+.about .about-content .left img {
+    width: 370px;
+    height: 370px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 3px solid #00ffe7;
+    box-shadow: 0 0 40px rgba(0, 255, 231, 0.5);
+    transition: all 0.3s ease;
+}
+
+.about .about-content .left img:hover {
+    transform: scale(1.02);
+    border-color: #ff00e7;
+    box-shadow: 
+        0 0 40px rgba(0, 255, 231, 0.7),
+        0 0 60px rgba(255, 0, 231, 0.3);
+}
+
+.about .about-content .left img:hover {
+    transform: scale(1.02);
+    box-shadow: 
+        0 0 40px rgba(0, 255, 231, 0.7),
+        0 0 60px rgba(255, 0, 231, 0.3);
+    border-color: #ff00e7;
+}
+
+.about .about-content .right {
+    width: 55%;
+    background: rgba(0, 17, 26, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #00ffe7;
+    box-shadow: 0 0 10px rgba(0, 255, 231, 0.3);
+}
+
+.about .about-content .right .text {
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-shadow: 0 0 5px #00ffe7;
+}
+
+.about .about-content .right .text span {
+    color: #ff00e7;
+    text-shadow: 0 0 10px #ff00e7;
+}
+
+.about .about-content .right p {
+    text-align: justify;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.about .about-content .right a {
+    display: inline-block;
+    background: rgba(0, 255, 231, 0.2);
+    color: #00ffe7;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 30px;
+    margin-top: 20px;
+    border-radius: 6px;
+    border: 2px solid #00ffe7;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #00ffe7;
+}
+
+.about .about-content .right a:hover {
+    color: #ff00e7;
+    background: rgba(255, 0, 231, 0.3);
+    border-color: #ff00e7;
+    box-shadow: 0 0 15px #ff00e7;
+}
+
+/* Services section styling with cyberpunk */
+.services, .projects {
+    color: #fff;
+    background: transparent;
+}
+
+.services .title::before,
+.projects .title::before {
+    background: #00ffe7;
+    box-shadow: 0 0 10px #00ffe7;
+}
+
+.services .title::after {
+    background: rgba(0, 17, 26, 0.9);
+    content: "what i know";
+    color: #ff00e7;
+}
+
+.projects .title::after {
+    background: rgba(0, 17, 26, 0.9);
+    content: "what i create";
+    color: #ff00e7;
+}
+
+.services .serv-content .card {
+    width: calc(33% - 20px);
+    background: rgba(0, 17, 26, 0.8);
+    text-align: center;
+    border-radius: 6px;
+    padding: 50px 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #00ffe7;
+    box-shadow: 0 0 10px rgba(0, 255, 231, 0.3);
+}
+
+.services .serv-content .card:hover {
+    background: rgba(255, 0, 231, 0.3);
+    border-color: #ff00e7;
+    box-shadow: 0 0 20px rgba(255, 0, 231, 0.5);
+    transform: translateY(-10px);
+}
+
+.services .serv-content .card .box {
+    transition: all 0.3s ease;
+}
+
+.services .serv-content .card:hover .box {
+    transform: scale(1.05);
+}
+
+.services .serv-content .card i {
+    font-size: 50px;
+    color: #00ffe7;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px #00ffe7;
+}
+
+.services .serv-content .card:hover i {
+    color: #ff00e7;
+    text-shadow: 0 0 15px #ff00e7;
+}
+
+.services .serv-content .card .text {
+    font-size: 25px;
+    font-weight: 500;
+    margin: 10px 0 7px 0;
+    color: #ffffff;
+}
+
+.services .serv-content .card p {
+    color: #ffffff;
+    opacity: 0.9;
+}
+
+/* Skills section styling with cyberpunk */
+.skills .title::after {
+    content: "what i provide";
+    color: #ff00e7;
+}
+
+.skills .skills-content .column {
+    width: calc(50% - 30px);
+}
+
+.skills .skills-content .left .text {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-shadow: 0 0 5px #00ffe7;
+}
+
+.skills .skills-content .left p {
+    text-align: justify;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.skills .skills-content .left a {
+    display: inline-block;
+    background: rgba(0, 255, 231, 0.2);
+    color: #00ffe7;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 8px 16px;
+    margin-top: 20px;
+    border-radius: 6px;
+    border: 2px solid #00ffe7;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #00ffe7;
+}
+
+.skills .skills-content .left a:hover {
+    color: #ff00e7;
+    background: rgba(255, 0, 231, 0.3);
+    border-color: #ff00e7;
+    box-shadow: 0 0 15px #ff00e7;
+}
+
+.skills .skills-content .right .bars {
+    margin-bottom: 15px;
+}
+
+.skills .skills-content .right .info {
+    display: flex;
+    margin-bottom: 5px;
+    align-items: center;
+    justify-content: space-between;
+    color: #ffffff;
+}
+
+.skills .skills-content .right span {
+    font-weight: 500;
+    font-size: 18px;
+    text-shadow: 0 0 5px #00ffe7;
+}
+
+.skills .skills-content .right .line {
+    height: 5px;
+    width: 100%;
+    background: rgba(0, 17, 26, 0.8);
+    position: relative;
+    border-radius: 3px;
+    border: 1px solid #00ffe7;
+}
+
+.skills .skills-content .right .line::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: linear-gradient(90deg, #00ffe7, #ff00e7);
+    border-radius: 3px;
+    box-shadow: 0 0 10px #00ffe7;
+    transition: width 2s ease;
+}
+
+.skills-content .right .html::before {
+    width: 90%;
+}
+
+.skills-content .right .css::before {
+    width: 60%;
+}
+
+.skills-content .right .js::before {
+    width: 80%;
+}
+
+.skills-content .right .php::before {
+    width: 50%;
+}
+
+.skills-content .right .mysql::before {
+    width: 70%;
+}
+
+/* Projects section styling with cyberpunk */
+.projects .title::after {
+    content: "the out come"; /* Changed to match HTML id="projects" */
+    color: #ff00e7;
+}
+
+    
+
+.projects .carousel .card {
+    background: rgba(0, 17, 26, 0.8);
+    border-radius: 6px;
+    padding: 25px 35px;
+    text-align: center;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #00ffe7;
+    box-shadow: 0 0 10px rgba(0, 255, 231, 0.3);
+}
+
+.projects .carousel .card:hover {
+    background: rgba(255, 0, 231, 0.3);
+    border-color: #ff00e7;
+    box-shadow: 0 0 20px rgba(255, 0, 231, 0.5);
+    transform: translateY(-10px);
+}
+
+.projects .carousel .card .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.projects .carousel .card:hover .box {
+    transform: scale(1.05);
+}
+
+.projects .carousel .card .text {
+    font-size: 25px;
+    font-weight: 500;
+    margin: 10px 0 7px 0;
+    color: #ffffff;
+}
+
+.projects .carousel .card img {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #00ffe7;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 255, 231, 0.5);
+}
