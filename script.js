@@ -11,8 +11,8 @@ async function convertPhotoToBase64(file) {
                         <div class="box">
                             <i class="fas fa-briefcase"></i>
                             <div class="text">${portfolioData.internships}</div>
-                            <p>Position: ${portfolioData.posting || 'N/A'}</p>
-                            <p>Duration: ${portfolioData.duration || 'N/A'}</p>
+                            <p>Position: ${portfolioData.posting || ||'N/A'}</p>
+                            <p>Duration: ${portfolioData.duration |||| 'N/A'}</p>
                         </div>
                     </div>
                 `;
@@ -299,3 +299,4 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+
